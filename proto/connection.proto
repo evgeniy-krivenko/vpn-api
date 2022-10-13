@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option go_package = "/api;connection_service";
+
+service ConnectionService {
+  rpc GetConnectionStatus(ConnectionStatusReq) returns (ConnectionStatusResp) {}
+  rpc GetNewConfig(NewConfigReq) returns (NewConfigResp) {}
+  rpc GetServers(ServersReq) returns (ServersResp) {}
+  rpc ActivateConnection(ActivateConnReq) returns (ActivateConnectionRes) {}
+  rpc DeactivateConnection(DeactivateConnReq) returns (DeactivateConnRes) {}
+}
+
+message ConnectionStatusReq {
+  string ConnectionId = 1;
+}
+
+message ConnectionStatusResp {
+  string ConnectionId = 1;
+  string ConnectionName = 2;
+  bool IsActive = 3;
+  bool IsConfigSent = 4;
+  optional int64 LastActivate = 5;
+}
+
+message NewConfigReq {
+  string ConnectionId = 1;
+}
+
+message NewConfigResp {
+  string Config = 1;
+}
+
+message ServersReq {
+  optional int64 UserId = 1;
+}
+
+message ServersResp {
+  repeated Server Servers = 1;
+}
+
+message Server {
+  string ConnectionId = 1;
+  string ConnectionName = 2;
+  bool IsActive = 3;
+}
+
+message ActivateConnReq {
+  uint64 Port = 1;
+  string UserId = 2;
+  string Secret = 3;
+}
+
+message ActivateConnectionRes {
+  bool status = 1;
+  int64 boundPort = 2;
+}
+
+message DeactivateConnReq {
+  string UserId = 1;
+  int64 BoundedPort = 2;
+}
+
+message DeactivateConnRes {
+  bool status = 1;
+}
