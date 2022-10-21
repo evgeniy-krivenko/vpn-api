@@ -1,4 +1,4 @@
-module github.com/evgeniy-krivenko/vpn-api/api
+module github.com/evgeniy-krivenko/vpn-api
 
 go 1.19
 
