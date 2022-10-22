@@ -6,31 +6,14 @@ import "google/protobuf/timestamp.proto";
 
 service ConnectionService {
   rpc GetConnections(GetConnectionsReq) returns (GetConnectionsRes) {}
-//  rpc GetConnectionStatus(ConnectionStatusReq) returns (ConnectionStatusResp) {}
-//  rpc GetNewConfig(NewConfigReq) returns (NewConfigResp) {}
-//  rpc GetServers(ServersReq) returns (ServersResp) {}
-//  rpc ActivateConnection(ActivateConnReq) returns (ActivateConnectionRes) {}
-//  rpc DeactivateConnection(DeactivateConnReq) returns (DeactivateConnRes) {}
+  rpc GetConnectionInfo(GetConnectionInfoReq) returns (Connection) {}
+  rpc GetServers(GetServersReq) returns (GetServersResp) {}
+  rpc GetConfig(GetConfigReq) returns (GetConfigRes) {}
+  rpc ActivateConnection(ActivateConnectionReq) returns (ActivateConnectionRes) {}
+  rpc DeactivateConnection(DeactivateConnectionReq) returns (DeactivateConnectionRes) {}
 }
 
-//message ConnectionStatusReq {
-//  string ConnectionId = 1;
-//}
-
-/* *
-type Connection struct {
-	Id              int          `db:"id"`
-	Location        string       `db:"location"`
-	Port            uint         `db:"port"`
-	UserId          int          `db:"user_id"`
-	EncryptedSecret string       `db:"encrypted_secret"`
-	IpAddress       string       `db:"ip_address"`
-	ServerId        int          `db:"server_id"`
-	IsActive        bool         `db:"is_active"`
-	LastActivate    sql.NullTime `db:"last_activate"`
-}
- */
-
+// GetConnections messages
 message Connection {
   int64 Id = 1;
   string Location = 2;
@@ -50,52 +33,54 @@ message GetConnectionsRes {
   repeated Connection Connections = 1;
 }
 
-//message ConnectionStatusResp {
-//  string ConnectionId = 1;
-//  string ConnectionName = 2;
-//  bool IsActive = 3;
-//  bool IsConfigSent = 4;
-//  optional google.protobuf.Timestamp LastActivate = 5;
-//}
-//
-//message NewConfigReq {
-//  string ConnectionId = 1;
-//}
-//
-//message NewConfigResp {
-//  string Config = 1;
-//}
-//
-//message ServersReq {
-//  optional int64 UserId = 1;
-//}
-//
-//message ServersResp {
-//  repeated Server Servers = 1;
-//}
-//
-//message Server {
-//  string ConnectionId = 1;
-//  string ConnectionName = 2;
-//  bool IsActive = 3;
-//}
+// GetConnectionInfo messages
+message GetConnectionInfoReq {
+  int64 Id = 1;
+}
 
-//message ActivateConnReq {
-//  uint64 Port = 1;
-//  string UserId = 2;
-//  string Secret = 3;
-//}
-//
-//message ActivateConnectionRes {
-//  bool status = 1;
-//  int64 boundPort = 2;
-//}
-//
-//message DeactivateConnReq {
-//  string UserId = 1;
-//  int64 BoundedPort = 2;
-//}
-//
-//message DeactivateConnRes {
-//  bool status = 1;
-//}
+// GetServers messages
+message GetServersReq {
+  optional int64 UserId = 1;
+}
+
+message GetServersResp {
+  repeated Server Servers = 1;
+}
+
+message Server {
+  string ConnectionId = 1;
+  string ConnectionName = 2;
+  bool IsActive = 3;
+}
+
+// GetConfig messages
+message GetConfigReq {
+  int64 ConnectionId = 1;
+  int64 UserId = 2;
+}
+
+message GetConfigRes {
+  string Config = 1;
+}
+
+// ActivateConnection messages
+message ActivateConnectionReq {
+  uint64 Port = 1;
+  string UserId = 2;
+  string Secret = 3;
+}
+
+message ActivateConnectionRes {
+  bool status = 1;
+  int64 boundPort = 2;
+}
+
+// DeactivateConnection messages
+message DeactivateConnectionReq {
+  string UserId = 1;
+  int64 BoundedPort = 2;
+}
+
+message DeactivateConnectionRes {
+  bool status = 1;
+}

@@ -21,6 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// GetConnections messages
 type Connection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -218,6 +219,537 @@ func (x *GetConnectionsRes) GetConnections() []*Connection {
 	return nil
 }
 
+// GetConnectionInfo messages
+type GetConnectionInfoReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+}
+
+func (x *GetConnectionInfoReq) Reset() {
+	*x = GetConnectionInfoReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetConnectionInfoReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConnectionInfoReq) ProtoMessage() {}
+
+func (x *GetConnectionInfoReq) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConnectionInfoReq.ProtoReflect.Descriptor instead.
+func (*GetConnectionInfoReq) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetConnectionInfoReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+// GetServers messages
+type GetServersReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId *int64 `protobuf:"varint,1,opt,name=UserId,proto3,oneof" json:"UserId,omitempty"`
+}
+
+func (x *GetServersReq) Reset() {
+	*x = GetServersReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetServersReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServersReq) ProtoMessage() {}
+
+func (x *GetServersReq) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServersReq.ProtoReflect.Descriptor instead.
+func (*GetServersReq) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetServersReq) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+type GetServersResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Servers []*Server `protobuf:"bytes,1,rep,name=Servers,proto3" json:"Servers,omitempty"`
+}
+
+func (x *GetServersResp) Reset() {
+	*x = GetServersResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetServersResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServersResp) ProtoMessage() {}
+
+func (x *GetServersResp) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServersResp.ProtoReflect.Descriptor instead.
+func (*GetServersResp) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetServersResp) GetServers() []*Server {
+	if x != nil {
+		return x.Servers
+	}
+	return nil
+}
+
+type Server struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ConnectionId   string `protobuf:"bytes,1,opt,name=ConnectionId,proto3" json:"ConnectionId,omitempty"`
+	ConnectionName string `protobuf:"bytes,2,opt,name=ConnectionName,proto3" json:"ConnectionName,omitempty"`
+	IsActive       bool   `protobuf:"varint,3,opt,name=IsActive,proto3" json:"IsActive,omitempty"`
+}
+
+func (x *Server) Reset() {
+	*x = Server{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Server) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Server) ProtoMessage() {}
+
+func (x *Server) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Server.ProtoReflect.Descriptor instead.
+func (*Server) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Server) GetConnectionId() string {
+	if x != nil {
+		return x.ConnectionId
+	}
+	return ""
+}
+
+func (x *Server) GetConnectionName() string {
+	if x != nil {
+		return x.ConnectionName
+	}
+	return ""
+}
+
+func (x *Server) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+// GetConfig messages
+type GetConfigReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ConnectionId int64 `protobuf:"varint,1,opt,name=ConnectionId,proto3" json:"ConnectionId,omitempty"`
+	UserId       int64 `protobuf:"varint,2,opt,name=UserId,proto3" json:"UserId,omitempty"`
+}
+
+func (x *GetConfigReq) Reset() {
+	*x = GetConfigReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetConfigReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConfigReq) ProtoMessage() {}
+
+func (x *GetConfigReq) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConfigReq.ProtoReflect.Descriptor instead.
+func (*GetConfigReq) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetConfigReq) GetConnectionId() int64 {
+	if x != nil {
+		return x.ConnectionId
+	}
+	return 0
+}
+
+func (x *GetConfigReq) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type GetConfigRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Config string `protobuf:"bytes,1,opt,name=Config,proto3" json:"Config,omitempty"`
+}
+
+func (x *GetConfigRes) Reset() {
+	*x = GetConfigRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetConfigRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConfigRes) ProtoMessage() {}
+
+func (x *GetConfigRes) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConfigRes.ProtoReflect.Descriptor instead.
+func (*GetConfigRes) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetConfigRes) GetConfig() string {
+	if x != nil {
+		return x.Config
+	}
+	return ""
+}
+
+// ActivateConnection messages
+type ActivateConnectionReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Port   uint64 `protobuf:"varint,1,opt,name=Port,proto3" json:"Port,omitempty"`
+	UserId string `protobuf:"bytes,2,opt,name=UserId,proto3" json:"UserId,omitempty"`
+	Secret string `protobuf:"bytes,3,opt,name=Secret,proto3" json:"Secret,omitempty"`
+}
+
+func (x *ActivateConnectionReq) Reset() {
+	*x = ActivateConnectionReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ActivateConnectionReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivateConnectionReq) ProtoMessage() {}
+
+func (x *ActivateConnectionReq) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivateConnectionReq.ProtoReflect.Descriptor instead.
+func (*ActivateConnectionReq) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ActivateConnectionReq) GetPort() uint64 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *ActivateConnectionReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ActivateConnectionReq) GetSecret() string {
+	if x != nil {
+		return x.Secret
+	}
+	return ""
+}
+
+type ActivateConnectionRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Status    bool  `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	BoundPort int64 `protobuf:"varint,2,opt,name=boundPort,proto3" json:"boundPort,omitempty"`
+}
+
+func (x *ActivateConnectionRes) Reset() {
+	*x = ActivateConnectionRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ActivateConnectionRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivateConnectionRes) ProtoMessage() {}
+
+func (x *ActivateConnectionRes) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivateConnectionRes.ProtoReflect.Descriptor instead.
+func (*ActivateConnectionRes) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ActivateConnectionRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *ActivateConnectionRes) GetBoundPort() int64 {
+	if x != nil {
+		return x.BoundPort
+	}
+	return 0
+}
+
+// DeactivateConnection messages
+type DeactivateConnectionReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId      string `protobuf:"bytes,1,opt,name=UserId,proto3" json:"UserId,omitempty"`
+	BoundedPort int64  `protobuf:"varint,2,opt,name=BoundedPort,proto3" json:"BoundedPort,omitempty"`
+}
+
+func (x *DeactivateConnectionReq) Reset() {
+	*x = DeactivateConnectionReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeactivateConnectionReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeactivateConnectionReq) ProtoMessage() {}
+
+func (x *DeactivateConnectionReq) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeactivateConnectionReq.ProtoReflect.Descriptor instead.
+func (*DeactivateConnectionReq) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *DeactivateConnectionReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *DeactivateConnectionReq) GetBoundedPort() int64 {
+	if x != nil {
+		return x.BoundedPort
+	}
+	return 0
+}
+
+type DeactivateConnectionRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Status bool `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+}
+
+func (x *DeactivateConnectionRes) Reset() {
+	*x = DeactivateConnectionRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_connection_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeactivateConnectionRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeactivateConnectionRes) ProtoMessage() {}
+
+func (x *DeactivateConnectionRes) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_connection_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeactivateConnectionRes.ProtoReflect.Descriptor instead.
+func (*DeactivateConnectionRes) Descriptor() ([]byte, []int) {
+	return file_proto_connection_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *DeactivateConnectionRes) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
 var File_proto_connection_proto protoreflect.FileDescriptor
 
 var file_proto_connection_proto_rawDesc = []byte{
@@ -248,12 +780,74 @@ var file_proto_connection_proto_rawDesc = []byte{
 	0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x12, 0x2d,
 	0x0a, 0x0b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20,
 	0x03, 0x28, 0x0b, 0x32, 0x0b, 0x2e, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e,
-	0x52, 0x0b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x32, 0x4f, 0x0a,
-	0x11, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x12, 0x3a, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x73, 0x12, 0x12, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x1a, 0x12, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f,
-	0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x22, 0x00, 0x42, 0x13,
+	0x52, 0x0b, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x26, 0x0a,
+	0x14, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e,
+	0x66, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x02, 0x49, 0x64, 0x22, 0x37, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x12, 0x1b, 0x0a, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x48, 0x00, 0x52, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64,
+	0x88, 0x01, 0x01, 0x42, 0x09, 0x0a, 0x07, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0x33,
+	0x0a, 0x0e, 0x47, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x21, 0x0a, 0x07, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x07, 0x2e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x52, 0x07, 0x53, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x73, 0x22, 0x70, 0x0a, 0x06, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x12, 0x22, 0x0a,
+	0x0c, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0c, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49,
+	0x64, 0x12, 0x26, 0x0a, 0x0e, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x4e,
+	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x43, 0x6f, 0x6e, 0x6e, 0x65,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x49, 0x73, 0x41,
+	0x63, 0x74, 0x69, 0x76, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x49, 0x73, 0x41,
+	0x63, 0x74, 0x69, 0x76, 0x65, 0x22, 0x4a, 0x0a, 0x0c, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x52, 0x65, 0x71, 0x12, 0x22, 0x0a, 0x0c, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x43, 0x6f, 0x6e,
+	0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x55, 0x73, 0x65,
+	0x72, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49,
+	0x64, 0x22, 0x26, 0x0a, 0x0c, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65,
+	0x73, 0x12, 0x16, 0x0a, 0x06, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x22, 0x5b, 0x0a, 0x15, 0x41, 0x63, 0x74,
+	0x69, 0x76, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52,
+	0x65, 0x71, 0x12, 0x12, 0x0a, 0x04, 0x50, 0x6f, 0x72, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x04, 0x50, 0x6f, 0x72, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x16,
+	0x0a, 0x06, 0x53, 0x65, 0x63, 0x72, 0x65, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x53, 0x65, 0x63, 0x72, 0x65, 0x74, 0x22, 0x4d, 0x0a, 0x15, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61,
+	0x74, 0x65, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x12,
+	0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x62, 0x6f, 0x75, 0x6e, 0x64,
+	0x50, 0x6f, 0x72, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x62, 0x6f, 0x75, 0x6e,
+	0x64, 0x50, 0x6f, 0x72, 0x74, 0x22, 0x53, 0x0a, 0x17, 0x44, 0x65, 0x61, 0x63, 0x74, 0x69, 0x76,
+	0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71,
+	0x12, 0x16, 0x0a, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x42, 0x6f, 0x75, 0x6e,
+	0x64, 0x65, 0x64, 0x50, 0x6f, 0x72, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x42,
+	0x6f, 0x75, 0x6e, 0x64, 0x65, 0x64, 0x50, 0x6f, 0x72, 0x74, 0x22, 0x31, 0x0a, 0x17, 0x44, 0x65,
+	0x61, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x65, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x32, 0xfe, 0x02,
+	0x0a, 0x11, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x12, 0x3a, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x12, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x1a, 0x12, 0x2e, 0x47, 0x65, 0x74, 0x43,
+	0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x22, 0x00, 0x12,
+	0x39, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x49, 0x6e, 0x66, 0x6f, 0x12, 0x15, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x0b, 0x2e, 0x43, 0x6f,
+	0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x00, 0x12, 0x2f, 0x0a, 0x0a, 0x47, 0x65,
+	0x74, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x73, 0x12, 0x0e, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x1a, 0x0f, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x22, 0x00, 0x12, 0x2b, 0x0a, 0x09, 0x47,
+	0x65, 0x74, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x0d, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x0d, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x52, 0x65, 0x73, 0x22, 0x00, 0x12, 0x46, 0x0a, 0x12, 0x41, 0x63, 0x74, 0x69,
+	0x76, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x16,
+	0x2e, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74,
+	0x65, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x22, 0x00,
+	0x12, 0x4c, 0x0a, 0x14, 0x44, 0x65, 0x61, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x65, 0x43, 0x6f,
+	0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x2e, 0x44, 0x65, 0x61, 0x63, 0x74,
+	0x69, 0x76, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52,
+	0x65, 0x71, 0x1a, 0x18, 0x2e, 0x44, 0x65, 0x61, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x65, 0x43,
+	0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x22, 0x00, 0x42, 0x13,
 	0x5a, 0x11, 0x2f, 0x61, 0x70, 0x69, 0x3b, 0x63, 0x6f, 0x6e, 0x6e, 0x5f, 0x73, 0x65, 0x72, 0x76,
 	0x69, 0x63, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
@@ -270,23 +864,44 @@ func file_proto_connection_proto_rawDescGZIP() []byte {
 	return file_proto_connection_proto_rawDescData
 }
 
-var file_proto_connection_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_proto_connection_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_proto_connection_proto_goTypes = []interface{}{
-	(*Connection)(nil),            // 0: Connection
-	(*GetConnectionsReq)(nil),     // 1: GetConnectionsReq
-	(*GetConnectionsRes)(nil),     // 2: GetConnectionsRes
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*Connection)(nil),              // 0: Connection
+	(*GetConnectionsReq)(nil),       // 1: GetConnectionsReq
+	(*GetConnectionsRes)(nil),       // 2: GetConnectionsRes
+	(*GetConnectionInfoReq)(nil),    // 3: GetConnectionInfoReq
+	(*GetServersReq)(nil),           // 4: GetServersReq
+	(*GetServersResp)(nil),          // 5: GetServersResp
+	(*Server)(nil),                  // 6: Server
+	(*GetConfigReq)(nil),            // 7: GetConfigReq
+	(*GetConfigRes)(nil),            // 8: GetConfigRes
+	(*ActivateConnectionReq)(nil),   // 9: ActivateConnectionReq
+	(*ActivateConnectionRes)(nil),   // 10: ActivateConnectionRes
+	(*DeactivateConnectionReq)(nil), // 11: DeactivateConnectionReq
+	(*DeactivateConnectionRes)(nil), // 12: DeactivateConnectionRes
+	(*timestamppb.Timestamp)(nil),   // 13: google.protobuf.Timestamp
 }
 var file_proto_connection_proto_depIdxs = []int32{
-	3, // 0: Connection.LastActivate:type_name -> google.protobuf.Timestamp
-	0, // 1: GetConnectionsRes.Connections:type_name -> Connection
-	1, // 2: ConnectionService.GetConnections:input_type -> GetConnectionsReq
-	2, // 3: ConnectionService.GetConnections:output_type -> GetConnectionsRes
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	13, // 0: Connection.LastActivate:type_name -> google.protobuf.Timestamp
+	0,  // 1: GetConnectionsRes.Connections:type_name -> Connection
+	6,  // 2: GetServersResp.Servers:type_name -> Server
+	1,  // 3: ConnectionService.GetConnections:input_type -> GetConnectionsReq
+	3,  // 4: ConnectionService.GetConnectionInfo:input_type -> GetConnectionInfoReq
+	4,  // 5: ConnectionService.GetServers:input_type -> GetServersReq
+	7,  // 6: ConnectionService.GetConfig:input_type -> GetConfigReq
+	9,  // 7: ConnectionService.ActivateConnection:input_type -> ActivateConnectionReq
+	11, // 8: ConnectionService.DeactivateConnection:input_type -> DeactivateConnectionReq
+	2,  // 9: ConnectionService.GetConnections:output_type -> GetConnectionsRes
+	0,  // 10: ConnectionService.GetConnectionInfo:output_type -> Connection
+	5,  // 11: ConnectionService.GetServers:output_type -> GetServersResp
+	8,  // 12: ConnectionService.GetConfig:output_type -> GetConfigRes
+	10, // 13: ConnectionService.ActivateConnection:output_type -> ActivateConnectionRes
+	12, // 14: ConnectionService.DeactivateConnection:output_type -> DeactivateConnectionRes
+	9,  // [9:15] is the sub-list for method output_type
+	3,  // [3:9] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_proto_connection_proto_init() }
@@ -331,15 +946,136 @@ func file_proto_connection_proto_init() {
 				return nil
 			}
 		}
+		file_proto_connection_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetConnectionInfoReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetServersReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetServersResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Server); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetConfigReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetConfigRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ActivateConnectionReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ActivateConnectionRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeactivateConnectionReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_connection_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeactivateConnectionRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_proto_connection_proto_msgTypes[0].OneofWrappers = []interface{}{}
+	file_proto_connection_proto_msgTypes[4].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_connection_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
