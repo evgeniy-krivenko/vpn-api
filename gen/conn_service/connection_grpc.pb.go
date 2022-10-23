@@ -26,8 +26,9 @@ type ConnectionServiceClient interface {
 	GetConnectionInfo(ctx context.Context, in *GetConnectionInfoReq, opts ...grpc.CallOption) (*Connection, error)
 	GetServers(ctx context.Context, in *GetServersReq, opts ...grpc.CallOption) (*GetServersResp, error)
 	GetConfig(ctx context.Context, in *GetConfigReq, opts ...grpc.CallOption) (*GetConfigRes, error)
-	ActivateConnection(ctx context.Context, in *ActivateConnectionReq, opts ...grpc.CallOption) (*ActivateConnectionRes, error)
-	DeactivateConnection(ctx context.Context, in *DeactivateConnectionReq, opts ...grpc.CallOption) (*DeactivateConnectionRes, error)
+	CreateConnection(ctx context.Context, in *CreateConnectionReq, opts ...grpc.CallOption) (*CreateConnectionRes, error)
+	ActivateConnection(ctx context.Context, in *SwitchConnectionReq, opts ...grpc.CallOption) (*SwitchConnectionRes, error)
+	DeactivateConnection(ctx context.Context, in *SwitchConnectionReq, opts ...grpc.CallOption) (*SwitchConnectionRes, error)
 }
 
 type connectionServiceClient struct {
@@ -74,8 +75,17 @@ func (c *connectionServiceClient) GetConfig(ctx context.Context, in *GetConfigRe
 	return out, nil
 }
 
-func (c *connectionServiceClient) ActivateConnection(ctx context.Context, in *ActivateConnectionReq, opts ...grpc.CallOption) (*ActivateConnectionRes, error) {
-	out := new(ActivateConnectionRes)
+func (c *connectionServiceClient) CreateConnection(ctx context.Context, in *CreateConnectionReq, opts ...grpc.CallOption) (*CreateConnectionRes, error) {
+	out := new(CreateConnectionRes)
+	err := c.cc.Invoke(ctx, "/ConnectionService/CreateConnection", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectionServiceClient) ActivateConnection(ctx context.Context, in *SwitchConnectionReq, opts ...grpc.CallOption) (*SwitchConnectionRes, error) {
+	out := new(SwitchConnectionRes)
 	err := c.cc.Invoke(ctx, "/ConnectionService/ActivateConnection", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -83,8 +93,8 @@ func (c *connectionServiceClient) ActivateConnection(ctx context.Context, in *Ac
 	return out, nil
 }
 
-func (c *connectionServiceClient) DeactivateConnection(ctx context.Context, in *DeactivateConnectionReq, opts ...grpc.CallOption) (*DeactivateConnectionRes, error) {
-	out := new(DeactivateConnectionRes)
+func (c *connectionServiceClient) DeactivateConnection(ctx context.Context, in *SwitchConnectionReq, opts ...grpc.CallOption) (*SwitchConnectionRes, error) {
+	out := new(SwitchConnectionRes)
 	err := c.cc.Invoke(ctx, "/ConnectionService/DeactivateConnection", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -100,8 +110,9 @@ type ConnectionServiceServer interface {
 	GetConnectionInfo(context.Context, *GetConnectionInfoReq) (*Connection, error)
 	GetServers(context.Context, *GetServersReq) (*GetServersResp, error)
 	GetConfig(context.Context, *GetConfigReq) (*GetConfigRes, error)
-	ActivateConnection(context.Context, *ActivateConnectionReq) (*ActivateConnectionRes, error)
-	DeactivateConnection(context.Context, *DeactivateConnectionReq) (*DeactivateConnectionRes, error)
+	CreateConnection(context.Context, *CreateConnectionReq) (*CreateConnectionRes, error)
+	ActivateConnection(context.Context, *SwitchConnectionReq) (*SwitchConnectionRes, error)
+	DeactivateConnection(context.Context, *SwitchConnectionReq) (*SwitchConnectionRes, error)
 	mustEmbedUnimplementedConnectionServiceServer()
 }
 
@@ -121,10 +132,13 @@ func (UnimplementedConnectionServiceServer) GetServers(context.Context, *GetServ
 func (UnimplementedConnectionServiceServer) GetConfig(context.Context, *GetConfigReq) (*GetConfigRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConfig not implemented")
 }
-func (UnimplementedConnectionServiceServer) ActivateConnection(context.Context, *ActivateConnectionReq) (*ActivateConnectionRes, error) {
+func (UnimplementedConnectionServiceServer) CreateConnection(context.Context, *CreateConnectionReq) (*CreateConnectionRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateConnection not implemented")
+}
+func (UnimplementedConnectionServiceServer) ActivateConnection(context.Context, *SwitchConnectionReq) (*SwitchConnectionRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ActivateConnection not implemented")
 }
-func (UnimplementedConnectionServiceServer) DeactivateConnection(context.Context, *DeactivateConnectionReq) (*DeactivateConnectionRes, error) {
+func (UnimplementedConnectionServiceServer) DeactivateConnection(context.Context, *SwitchConnectionReq) (*SwitchConnectionRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeactivateConnection not implemented")
 }
 func (UnimplementedConnectionServiceServer) mustEmbedUnimplementedConnectionServiceServer() {}
@@ -212,8 +226,26 @@ func _ConnectionService_GetConfig_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConnectionService_CreateConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateConnectionReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectionServiceServer).CreateConnection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ConnectionService/CreateConnection",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectionServiceServer).CreateConnection(ctx, req.(*CreateConnectionReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ConnectionService_ActivateConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ActivateConnectionReq)
+	in := new(SwitchConnectionReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -225,13 +257,13 @@ func _ConnectionService_ActivateConnection_Handler(srv interface{}, ctx context.
 		FullMethod: "/ConnectionService/ActivateConnection",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConnectionServiceServer).ActivateConnection(ctx, req.(*ActivateConnectionReq))
+		return srv.(ConnectionServiceServer).ActivateConnection(ctx, req.(*SwitchConnectionReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ConnectionService_DeactivateConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeactivateConnectionReq)
+	in := new(SwitchConnectionReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -243,7 +275,7 @@ func _ConnectionService_DeactivateConnection_Handler(srv interface{}, ctx contex
 		FullMethod: "/ConnectionService/DeactivateConnection",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConnectionServiceServer).DeactivateConnection(ctx, req.(*DeactivateConnectionReq))
+		return srv.(ConnectionServiceServer).DeactivateConnection(ctx, req.(*SwitchConnectionReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -270,6 +302,10 @@ var ConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetConfig",
 			Handler:    _ConnectionService_GetConfig_Handler,
+		},
+		{
+			MethodName: "CreateConnection",
+			Handler:    _ConnectionService_CreateConnection_Handler,
 		},
 		{
 			MethodName: "ActivateConnection",
