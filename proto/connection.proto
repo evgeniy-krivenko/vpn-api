@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "/api;conn_service";
+option go_package = "/conn_service";
 
 import "google/protobuf/timestamp.proto";
 

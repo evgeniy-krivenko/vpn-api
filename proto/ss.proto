@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "/ss_service";
+
+service SsService {
+  rpc ActivateSsConnection(SsConnectionReq) returns (SsConnectionRes) {}
+  rpc DeactivateSsConnection(SsConnectionReq) returns (SsConnectionRes) {}
+  rpc SsConnectionStatus(SsConnectionReq) returns (SsConnectionRes) {}
+  rpc CheckSsPortAvailable(CheckSsPortAvailableReq) returns (CheckSsPortAvailableRes) {}
+}
+
+message SsConnectionReq {
+  uint64 Port = 1;
+  string UserId = 2;
+  string Secret = 3;
+}
+
+message SsConnectionRes {
+  bool IsActive = 1;
+}
+
+message CheckSsPortAvailableReq {
+  uint64 Port = 1;
+}
+
+message CheckSsPortAvailableRes {
+  bool Status = 1;
+}
