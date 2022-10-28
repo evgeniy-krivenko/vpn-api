@@ -9,7 +9,7 @@ service ConnectionService {
   rpc GetConnectionInfo(GetConnectionInfoReq) returns (Connection) {}
   rpc GetServers(GetServersReq) returns (GetServersResp) {}
   rpc GetConfig(GetConfigReq) returns (GetConfigRes) {}
-  rpc CreateConnection(CreateConnectionReq) returns (CreateConnectionRes) {}
+  rpc CreateConnection(CreateConnectionReq) returns (Connection) {}
   rpc ActivateConnection(SwitchConnectionReq) returns (SwitchConnectionRes) {}
   rpc DeactivateConnection(SwitchConnectionReq) returns (SwitchConnectionRes) {}
 }

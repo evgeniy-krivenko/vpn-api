@@ -26,7 +26,7 @@ type ConnectionServiceClient interface {
 	GetConnectionInfo(ctx context.Context, in *GetConnectionInfoReq, opts ...grpc.CallOption) (*Connection, error)
 	GetServers(ctx context.Context, in *GetServersReq, opts ...grpc.CallOption) (*GetServersResp, error)
 	GetConfig(ctx context.Context, in *GetConfigReq, opts ...grpc.CallOption) (*GetConfigRes, error)
-	CreateConnection(ctx context.Context, in *CreateConnectionReq, opts ...grpc.CallOption) (*CreateConnectionRes, error)
+	CreateConnection(ctx context.Context, in *CreateConnectionReq, opts ...grpc.CallOption) (*Connection, error)
 	ActivateConnection(ctx context.Context, in *SwitchConnectionReq, opts ...grpc.CallOption) (*SwitchConnectionRes, error)
 	DeactivateConnection(ctx context.Context, in *SwitchConnectionReq, opts ...grpc.CallOption) (*SwitchConnectionRes, error)
 }
@@ -75,8 +75,8 @@ func (c *connectionServiceClient) GetConfig(ctx context.Context, in *GetConfigRe
 	return out, nil
 }
 
-func (c *connectionServiceClient) CreateConnection(ctx context.Context, in *CreateConnectionReq, opts ...grpc.CallOption) (*CreateConnectionRes, error) {
-	out := new(CreateConnectionRes)
+func (c *connectionServiceClient) CreateConnection(ctx context.Context, in *CreateConnectionReq, opts ...grpc.CallOption) (*Connection, error) {
+	out := new(Connection)
 	err := c.cc.Invoke(ctx, "/ConnectionService/CreateConnection", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ type ConnectionServiceServer interface {
 	GetConnectionInfo(context.Context, *GetConnectionInfoReq) (*Connection, error)
 	GetServers(context.Context, *GetServersReq) (*GetServersResp, error)
 	GetConfig(context.Context, *GetConfigReq) (*GetConfigRes, error)
-	CreateConnection(context.Context, *CreateConnectionReq) (*CreateConnectionRes, error)
+	CreateConnection(context.Context, *CreateConnectionReq) (*Connection, error)
 	ActivateConnection(context.Context, *SwitchConnectionReq) (*SwitchConnectionRes, error)
 	DeactivateConnection(context.Context, *SwitchConnectionReq) (*SwitchConnectionRes, error)
 	mustEmbedUnimplementedConnectionServiceServer()
@@ -132,7 +132,7 @@ func (UnimplementedConnectionServiceServer) GetServers(context.Context, *GetServ
 func (UnimplementedConnectionServiceServer) GetConfig(context.Context, *GetConfigReq) (*GetConfigRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConfig not implemented")
 }
-func (UnimplementedConnectionServiceServer) CreateConnection(context.Context, *CreateConnectionReq) (*CreateConnectionRes, error) {
+func (UnimplementedConnectionServiceServer) CreateConnection(context.Context, *CreateConnectionReq) (*Connection, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateConnection not implemented")
 }
 func (UnimplementedConnectionServiceServer) ActivateConnection(context.Context, *SwitchConnectionReq) (*SwitchConnectionRes, error) {
