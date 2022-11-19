@@ -8,6 +8,8 @@ gen:
 	@protoc --go_out=./gen --go_grpc_out=./gen proto/*.proto
 			@for dir in $(CURDIR)/gen/*; do \
 			  cd $$dir && \
+			  rm -f *.mod && \
+			  rm -f *.sum && \
 			  go mod init && go mod tidy; \
 			done
 
