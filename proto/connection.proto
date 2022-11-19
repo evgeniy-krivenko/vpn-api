@@ -49,9 +49,9 @@ message GetServersResp {
 }
 
 message Server {
-  string ConnectionId = 1;
-  string ConnectionName = 2;
-  bool IsActive = 3;
+  string Id = 1;
+  string IpAddress = 2;
+  string Location = 3;
 }
 
 // GetConfig messages
